@@ -193,10 +193,12 @@ ninja.open({ parent: 'Theme' })
 ### Events
 Component wide events
 
-| Name                               | Description                         | Payload |
-|------------------------------------|-------------------------------------| ------- |
-| `change`                         | Emitted when on each change of search input | `{ detail: { search: string, actions: Array<NinjaAction> } }` |
-| `selected`                       | Emitted when on user selected action or on submit of input | `{ detail: { search: string, action: NinjaAction or undefined }}` |
+| Name       | Description                                             | Payload |
+|------------|---------------------------------------------------------| ------- |
+| `change`   | Emitted on each change of search input             | `{ detail: { search: string, actions: Array<NinjaAction> } }` |
+| `selected` | Emitted when user selected action or on submit of input | `{ detail: { search: string, action: NinjaAction or undefined }}` |
+| `opened`   | Emitted when user opens modal                           |  |
+| `closed`   | Emitted when user closes modal                          |  |
 
 Both `handler` of action and component event `selected` emitted when user submit form or select item.
 

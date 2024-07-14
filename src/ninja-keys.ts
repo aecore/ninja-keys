@@ -99,6 +99,10 @@ export class NinjaKeys extends LitElement {
   open(options: {parent?: string} = {}) {
     this._bump = true;
     this.visible = true;
+
+    // Dispatch opened event
+    this.dispatchEvent(new CustomEvent('opened', {bubbles: true, composed: true}));
+
     this._headerRef.value!.focusSearch();
     if (this._actionMatches.length > 0) {
       this._selected = this._actionMatches[0];
@@ -112,6 +116,8 @@ export class NinjaKeys extends LitElement {
   close() {
     this._bump = false;
     this.visible = false;
+    // Dispatch closed event
+    this.dispatchEvent(new CustomEvent('closed', {bubbles: true, composed: true}));
   }
 
   /**
