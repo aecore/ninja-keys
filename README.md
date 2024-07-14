@@ -16,13 +16,12 @@ Keyboard shortcut interface for your website that works with Vanilla JS, Vue, an
 A lot of applications support a common pattern where the user hits <kbd>⌘</kbd>+<kbd>k</kbd> (or <kbd>ctrl</kbd>+<kbd>k</kbd>) and a search UI dialog appears. 
 I've recently seen this in Notion, Slack, Linear, Vercel and Algolia, but I'm sure there are plenty more.
 Apple Spotlight, Alfred and the Raycast app also have a similar pattern, but with different shortcuts.
-There are already some libraries built for this, but they are too framework specific, like [Laravel only](https://github.com/livewire-ui/spotlight) or [React only](https://github.com/timc1/kbar) 
+There are already some libraries built for this, but they are too framework specific, like [Laravel only](https://github.com/livewire-ui/spotlight) or [React only](https://github.com/timc1/kbar)
 Nevertheless, mine is not a silver bullet and if you need more framework integration, check them out too.
 
 I needed a keyboard interface for navigation with static websites without any frameworks.
-At the same time, I have a few Vue projects where something like this could be useful, 
+At the same time, I have a few Vue projects where something like this could be useful,
 so I decided to give it a try for [Web Components](https://open-wc.org/) and [Lit Element](https://lit.dev/).
-
 
 ## Integrations
 
@@ -44,7 +43,6 @@ so I decided to give it a try for [Web Components](https://open-wc.org/) and [Li
 - Root search - for example, if you search "Dark," it will find it within the "Theme" submenu
 - CSS variable to customize the view
 - Customizable hotkeys to open/close etc. Choose what best fits your website.
-
 
 ## Why the "Ninja" name?
 
@@ -107,7 +105,7 @@ Add the tag to your HTML.
       hotkey: 'ctrl+T',
       handler: () => {
         // open menu if closed. Because you can open directly that menu from it's hotkey
-        ninja.open({ parent: 'Theme' });
+        ninja.open({parent: 'Theme'});
         // if menu opened that prevent it from closing on select that action, no need if you don't have child actions
         return {keepOpen: true};
       },
@@ -182,25 +180,30 @@ Library using flat data structure inside, as in the example above. But you can a
 #### Example
 
 ```html
-<ninja-keys placeholder="Must app is awesome" openHotkey="cmd+l" hideBreadcrumbs></ninja-keys>
+<ninja-keys
+  placeholder="Must app is awesome"
+  openHotkey="cmd+l"
+  hideBreadcrumbs
+></ninja-keys>
 ```
 
 ## Data
 
 Array of `INinjaAction` - interface properties below
-
 | Name     | Type                    | Description                                                  |
 | -------- | ----------------------- | ------------------------------------------------------------ |
-| id       | string                  | Unique id/text. Will be displayed as breadcrumb in multimenu |
-| title    | string                  | Title of action                                              |
-| hotkey   | string(optional)        | Shortcut to display and register                             |
-| handler  | Function(optional)      | Function to execute on select                                |
-| mdIcon   | string(optional)        | Material Design font icon name                               |
-| icon     | string(optional)        | Html to render as custom icon                                |
-| parent   | string(optional)        | If using flat structure use id of actions to make a multilevel menu |
-| keywords | string(optional)        | Keywords to use for search                                   |
+| Name | Type | Description |
+|----------|-------------------------|----------------------------------------------------------------------------------------|
+| id | string | Unique id/text. Will be displayed as breadcrumb in multimenu |
+| title | string | Title of action |
+| hotkey | string(optional) | Shortcut to display and register |
+| handler | Function(optional) | Function to execute on select |
+| mdIcon | string(optional) | Material Design font icon name |
+| icon | string(optional) | Html to render as custom icon |
+| parent | string(optional) | If using flat structure use id of actions to make a multilevel menu |
+| keywords | string(optional) | Keywords to use for search |
 | children | Array<string>(optional) | If using flat structure then ids of child menu actions. Not required on tree structure |
-| section  | string(optional)        | Section text. Like a header will be group with other same sections |
+| section | string(optional) | Section text. Like a header will be group with other same sections |
 | keep     | boolean(optional)       | Whether to keep hotkey monitoring when opening the ninja-keys search input.The default is false |
 
 ## Methods
@@ -215,9 +218,9 @@ Array of `INinjaAction` - interface properties below
 
 ```js
 const ninja = document.querySelector('ninja-keys');
-ninja.open() 
+ninja.open();
 // or
-ninja.open({ parent: 'Theme' })
+ninja.open({parent: 'Theme'});
 ```
 
 ### Events
@@ -241,15 +244,14 @@ For example, if a user enters a search query and there is an empty list, listeni
 ninja.addEventListener('change', (event) => {
   console.log('ninja on change', event.detail);
   // detail = {search: 'your search query', actions: Array<NinjaAction>}
-})
+});
 ninja.addEventListener('selected', (event) => {
   console.log('ninja on selected', event.detail);
   // detail = {search: 'your search query', action: NinjaAction | undefined }
-  if (event.detail.action){
-  // perform API search for example
+  if (event.detail.action) {
+    // perform API search for example
   }
-   
-})
+});
 ```
 
 ## Themes
@@ -326,7 +328,6 @@ ninja-keys::part(ninja-selected) {
   background: rgba(51, 51, 51, 0.1);
 }
 
-
 ninja-keys::part(ninja-input) {
   color: #14b8a6;
 }
@@ -349,7 +350,10 @@ For example, you can just set `mdIcon` to `light_mode` to render a sun icon.
 To add Material icons for your website, you need to add them to your HTML, for example
 
 ```html
-<link href="https://fonts.googleapis.com/css?family=Material+Icons&display=block" rel="stylesheet">
+<link
+  href="https://fonts.googleapis.com/css?family=Material+Icons&display=block"
+  rel="stylesheet"
+/>
 ```
 
 If you want custom icons, you can use `svg` or `img` to insert it with an `icon` property for action with `ninja-icon` class.
@@ -373,15 +377,13 @@ ninja-keys {
 }
 ```
 
-
 ### Change or hide footer
 
 ```html
-<ninja-keys> 
+<ninja-keys>
   <div slot="footer">You can use a custom footer or empty div to hide it</div>
 </ninja-keys>
 ```
-
 
 ## Dev Server
 
